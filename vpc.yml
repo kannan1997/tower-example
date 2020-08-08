@@ -35,8 +35,8 @@
         state:            "present"
         vpc_id:           "{{ vpc_id }}"
         cidr:             "{{ 10.0.1.0/24 }}"
-        az:               "{{ aws_region }}a"
-        region:           "{{ aws_region }}"
+        az:               "{{ us-east-2 }}"
+        region:           "{{ us-east-2 }}"
         resource_tags:
           Name:           "Public Subnet"
       register: public_subnet
@@ -50,7 +50,7 @@
     - name:               reate public route table
       ec2_vpc_route_table:
         vpc_id:           "{{ vpc_id }}"
-        region:           "{{ aws_region }}"
+        region:           "{{ us-east-2 }}"
         tags:
           Name:           "Public_Route_Table"
         subnets:
