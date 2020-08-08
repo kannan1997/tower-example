@@ -1,0 +1,60 @@
+{
+    "invocation": {
+        "module_args": {
+            "security_token": null,
+            "volumes": null,
+            "vpc_subnet_id": "subnet-fdc90096",
+            "aws_access_key": null,
+            "instance_initiated_shutdown_behavior": "stop",
+            "spot_type": "one-time",
+            "exact_count": null,
+            "tenancy": "default",
+            "count_tag": null,
+            "spot_price": null,
+            "network_interfaces": null,
+            "ebs_optimized": false,
+            "ec2_url": null,
+            "key_name": "akash",
+            "group": [
+                "all"
+            ],
+            "monitoring": false,
+            "debug_botocore_endpoint_logs": false,
+            "source_dest_check": null,
+            "ramdisk": null,
+            "region": "us-east-2",
+            "placement_group": null,
+            "termination_protection": null,
+            "spot_launch_group": null,
+            "instance_profile_name": "EC2Launch",
+            "group_id": null,
+            "private_ip": null,
+            "count": 1,
+            "instance_tags": {
+                "Environment": "ENVIRONMENT_NAME",
+                "Name": "PROD"
+            },
+            "kernel": null,
+            "wait_timeout": 300,
+            "id": null,
+            "profile": null,
+            "image": "ami-04781752c9b20ea41",
+            "validate_certs": true,
+            "spot_wait_timeout": 600,
+            "aws_secret_key": null,
+            "assign_public_ip": null,
+            "user_data": null,
+            "instance_ids": null,
+            "state": "present",
+            "instance_type": "t2.micro",
+            "wait": true,
+            "zone": null
+        }
+    },
+    "msg": "boto required for this module",
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "_ansible_no_log": false,
+    "changed": false
+}
