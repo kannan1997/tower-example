@@ -1,0 +1,21 @@
+---
+
+- hosts: 172.31.6.7
+  connection: local
+  gather_facts: False
+
+  tasks:
+
+    - name: Provision a set of instances
+      ec2:
+         key_name: akash
+         group: test
+         instance_type: t2.micro
+         image: "{{ ami-04781752c9b20ea41 }}"
+         wait: true
+         exact_count: 5
+         count_tag:
+            Name: Prod
+         instance_tags:
+            Name: Prod-demo
+      register: ec2
