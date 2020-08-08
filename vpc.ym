@@ -1,0 +1,61 @@
+---
+### Creating New VPC
+- hosts: 172.31.6.7
+  connection: local
+  gather_facts: false
+  user: ubuntu
+  tasks:
+    # Creating the VPC in specified region and saving the VPC Id value in new variable
+    - name:               Create VPC
+      ec2_vpc_net:
+        name:             "{{ ansible }}"
+        cidr_block:       "{{ 10.0.0.0/16 }}"
+        region:           "{{ us-east-2 }}"
+        state:            "present"
+      register: new_vpc
+    - name:                capture vpc id in new variable
+      set_fact:
+        vpc_id:                   "{{ new_vpc.vpc.id }}"
+    # Creating Internet Getway and attching to VPC
+    - name:               Create IG for Newly Created VPC
+      ec2_vpc_igw:
+        vpc_id:           "{{ vpc_id }}"
+        region:           "{{ us-east-2 }}"
+        state:            "present"
+      register: vpc_igw
+    - name:               Set Internet Gateway ID in variable
+      set_fact:
+        igw_id:           "{{ vpc_igw.gateway_id }}"
+      tags: VPC_CREATION_ATTACHING_INTERNETGATEWAY
+      
+      
+    # Creating our only Subnet in the VPC and saving the subnet ID using set_fact Module
+    - name:               Create Public Subnet
+      ec2_vpc_subnet:
+        state:            "present"
+        vpc_id:           "{{ vpc_id }}"
+        cidr:             "{{ 10.0.1.0/24 }}"
+        az:               "{{ aws_region }}a"
+        region:           "{{ aws_region }}"
+        resource_tags:
+          Name:           "Public Subnet"
+      register: public_subnet
+
+    - name:               Set Public Subnet ID in variable
+      set_fact:
+        public_subnet_id: "{{ public_subnet.subnet.id }}"
+
+    # Creating Route table for public subnet
+
+    - name:               reate public route table
+      ec2_vpc_route_table:
+        vpc_id:           "{{ vpc_id }}"
+        region:           "{{ aws_region }}"
+        tags:
+          Name:           "Public_Route_Table"
+        subnets:
+          - "{{ public_subnet_id }}"
+        routes:
+          - dest:         "0.0.0.0/0"
+            gateway_id:   "{{ igw_id }}"
+            
