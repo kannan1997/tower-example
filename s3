@@ -3,6 +3,6 @@
 
 - name: Create an empty bucket
   aws_s3:
-    bucket: mybucket
+    bucket: kannannewbucket
     mode: create
     permission: public-read
