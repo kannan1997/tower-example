@@ -8,8 +8,8 @@
     # Creating the VPC in specified region and saving the VPC Id value in new variable
     - name:               Create VPC
       ec2_vpc_net:
-        name:             "{{ ansible }}"
-        cidr_block:       "{{ 10.0.0.0/16 }}"
-        region:           "{{ us-east-2 }}"
+        name:             "ansible"
+        cidr_block:       "10.0.0.0/16"
+        region:           "us-east-2"
         state:            "present"
-      register: new_vpc
+     
