@@ -1,0 +1,7 @@
+---
+  hosts: 172.31.6.7
+- name: Creates directory
+  file:
+    path: /home/ubuntu
+    state: directory
+    mode: 0777
