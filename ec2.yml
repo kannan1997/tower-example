@@ -1,0 +1,29 @@
+---
+- name: Create a new EC2 instance
+  hosts: 172.31.6.7
+  gather_facts: False
+  vars:
+      region: us-east-2
+      instance_type: t2.micro 
+      ami: ami-04781752c9b20ea41  # Ubuntu 16.04 LTS
+      keypair: akash	 # pem file name
+      instance_count: 1 # default 1 Instance
+      subnet_id: subnet-fdc90096
+  tasks:
+    - name: Create an ec2 instance for titan
+      ec2:
+         key_name: "{{ keypair }}"
+         group: all  # security group name
+         instance_type: "{{ instance_type}}"
+         image: "{{ ami }}"
+         wait: true
+         region: "{{ region }}"
+         count: "{{ instance_count }}"  # default
+         instance_profile_name: EC2Launch
+         instance_tags:
+            Name: PROD  
+            Environment: ENVIRONMENT_NAME
+         vpc_subnet_id: "{{ subnet_id }}"
+         assign_public_ip: yes
+         aws_access_key: AKIAX35SZ4VF3EHP4EPC
+         Aws_secret_key: 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
