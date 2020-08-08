@@ -24,6 +24,4 @@
             Name: PROD  
             Environment: ENVIRONMENT_NAME
          vpc_subnet_id: "{{ subnet_id }}"
-         assign_public_ip: yes
-         aws_access_key: AKIAX35SZ4VF3EHP4EPC
-         Aws_secret_key: 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
+        
